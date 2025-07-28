@@ -1,17 +1,22 @@
+server:
+  port: 8081
+
 spring:
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://host/database # Додайте власний HOST та базу даних
-    username: user # додайте власний логін
-    password: password # додайте власний пароль
+    url: jdbc:postgresql://localhost:5432/POSTGRESQL # Додайте власний HOST та базу даних
+    username: postgres # додайте власний логін
+    password: 0987qqqwww # додайте власний пароль
     driverClassName: org.postgresql.Driver
   sql:
     init:
       platform: postgres
+
+

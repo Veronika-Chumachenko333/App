@@ -1,0 +1,48 @@
+package ua.opnu.practice1_template.controller;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ua.opnu.practice1_template.entity.Instructor;
+import ua.opnu.practice1_template.service.InstructorService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/instructors")
+@RequiredArgsConstructor
+public class InstructorController {
+    private final InstructorService instructorService;
+
+    @Autowired
+    public InstructorController(InstructorService instructorService) {
+        this.instructorService = instructorService;
+    }
+
+    @PostMapping ("/instructor")
+    public ResponseEntity<Instructor> createInstructor(@RequestBody Instructor instructor) {
+        return ResponseEntity.ok(instructorService.createInstructor(instructor));
+    }
+
+    @GetMapping
+    public List<Instructor> getAllInstructors() {
+        return instructorService.getAllInstructors();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Instructor> getInstructorById(@PathVariable Long id) {
+        return ResponseEntity.ok(instructorService.getInstructorById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Instructor> updateInstructor(@PathVariable Long id, @RequestBody Instructor instructor) {
+        return ResponseEntity.ok(instructorService.updateInstructor(id, instructor));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteInstructor(@PathVariable Long id) {
+        instructorService.deleteInstructor(id);
+        return ResponseEntity.noContent().build();
+    }
+}
